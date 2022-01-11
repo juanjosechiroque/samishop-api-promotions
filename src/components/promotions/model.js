@@ -6,6 +6,7 @@ const promotionSchema = new Schema({
     merchant_id: { type: String },
     name: { type: String },
     range: { type: String },
+    coupon: { type: String },
     tag_quantity: { type: Number },
     tag: { type: String },
     discount_quantity: { type: Number },

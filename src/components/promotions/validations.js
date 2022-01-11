@@ -2,7 +2,7 @@ const Joi = require("joi");
 
 const runSchema = Joi.object().keys({
     merchant_id: Joi.string().required(),
-    coupon: Joi.string(),
+    coupon: Joi.string().allow(""),
     products: Joi.array().min(1).items(Joi.object().keys({ 
         sku: Joi.string().min(1).required(), 
         title: Joi.string().min(1).required(),

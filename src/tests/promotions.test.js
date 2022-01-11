@@ -193,5 +193,47 @@ describe('Validate promotions, with right request',  () => {
 
     });
 
+    it('when there is a coupon', async () => {
+
+        const data = {
+            merchant_id: "11",
+            coupon: "CRAZY90",
+            products: [
+                {
+                    sku: "CAMISA001ROJOS",
+                    title: "CAMISA ROJA SMALL",
+                    price: 40,
+                    sale_price: 30,
+                    quantity: 1,
+                    tag: "ALL,ROPA,CAMISA,PROMO1"
+                },
+                {
+                    sku: "CAMISAAZULL",
+                    title: "CAMISA AZUL L",
+                    price: 90,
+                    sale_price: 80,
+                    quantity: 1,
+                    tag: "ALL,ROPA,CAMISA"
+                },
+                {
+                    sku: "ZAPATILLAS00139",
+                    title: "ZAPATILLAS 39",
+                    price: 160,
+                    sale_price: 150,
+                    quantity: 2,
+                    tag: "ALL,ZAPATILLAS,NIKE,REG1"
+                }
+            ]
+        }
+
+        const response = await request(app).post("/promotions").send(data);        
+        
+        expect(response.statusCode).toBe(200);
+        expect(response.body.products).toBeTruthy();
+        expect(response.body.summary).toBeTruthy(); 
+        expect(response.body.products.some(x => 'promo' in x)).toBe(true);
+
+    });
+
 
 })
