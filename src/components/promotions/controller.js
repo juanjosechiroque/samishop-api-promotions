@@ -54,9 +54,8 @@ async function getRulesToEvalute(merchant_id, coupon) {
     
     let query = {};
     query.merchant_id = merchant_id;
-
-    if (coupon) query.coupon = coupon;
-
+    query.coupon = coupon || "";
+    
     let lsRules = await promotionDao.getRulesByMerchantId(query);
     
     lsRules = lsRules.filter(x => x.status == 1);
